@@ -109,6 +109,7 @@ class ICMPv6Header extends FieldsChunk
     bit chunkLength @overridegetter;
     int type @enum(ICMPv6Type);
         //int code; //TODO: this should be specific to different ICMP types.
+    int chksum = 0;
 }
 
 //
