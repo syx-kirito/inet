@@ -182,6 +182,11 @@ class INET_API UDP : public cSimpleModule, public ILifecycle
     // ILifeCycle:
     virtual bool handleOperationStage(LifecycleOperation *operation, int stage, IDoneCallback *doneCallback) override;
 
+    // crc
+    virtual void setupCrc(Packet *packet, const std::shared_ptr<UdpHeader>& udpHeader);
+    virtual bool checkCrc(Packet *udpPacket, const std::shared_ptr<UdpHeader>& udpHeader);
+    virtual uint16_t computeCrc(const BytesChunk& pseudoHeader, const BytesChunk& udpHeader, const BytesChunk& udpData);
+
   public:
     UDP();
     virtual ~UDP();
@@ -191,8 +196,6 @@ class INET_API UDP : public cSimpleModule, public ILifecycle
     virtual int numInitStages() const override { return NUM_INIT_STAGES; }
     virtual void handleMessage(cMessage *msg) override;
 };
-
-uint16_t computeUdpCrc(const TransportPseudoHeader& pseudoHeader, const BytesChunk& udpPacket);
 
 } // namespace inet
 

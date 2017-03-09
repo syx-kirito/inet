@@ -18,7 +18,7 @@
 //
 
 cplusplus {{
-#include "inet/common/INETDefs.h"
+#include "inet/common/packet/chunk/FieldsChunk.h"
 #include "inet/networklayer/common/L3Address.h"
 }}
 
@@ -29,8 +29,9 @@ class noncobject L3Address;
 //
 // Represents a TCP/UDP pseudo header, used for crc calculation.
 //
-class TransportPseudoHeader
+class TransportPseudoHeader extends FieldsChunk
 {
+    bit chunkLength @overridegetter;
     L3Address srcAddress;
     L3Address destAddress;
     int reserved = 0;
